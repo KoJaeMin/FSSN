@@ -1,0 +1,26 @@
+{
+  "name": "fssn",
+  "version": "0.0.0",
+  "description": "Full Stack Service Network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KoJaeMin/FSSN.git"
+  },
+  "author": "KoJaeMin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KoJaeMin/FSSN/issues"
+  },
+  "homepage": "https://github.com/KoJaeMin/FSSN#readme",
+  "dependencies": {
+    "@types/node": "^17.0.23",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.0-dev.20220323"
+  }
+}
