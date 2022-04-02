@@ -20,10 +20,10 @@ client.on("connect",()=>{
     
     rl.on("line",(msg)=>{
         if(msg==='exit'||msg==='quit'||msg==='end'){
-            client.end()
             console.log("Exit Chatting Room")
-        }
-        client.write(msg)
+            client.end()
+        }else
+            client.write(msg);
     })
 });
 client.on("data", (data) => {
@@ -32,14 +32,12 @@ client.on("data", (data) => {
 
 client.on("end",(haderror)=>{
     if(haderror===true) throw "Error";
-    console.log("> Server will be closed")
     client.end()
 })
 
 //socket이 완전히 닫혔을때
 client.on("close",(haderror)=>{
     if(haderror===true) throw "Error";
-
     console.log("> End")
-    process.exit(1);
+    process.exit(0);
 })

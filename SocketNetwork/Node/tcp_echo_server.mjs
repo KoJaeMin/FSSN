@@ -40,8 +40,6 @@ class ChattingServer{
         server.on("connection",(Socket)=>{
             this.#sockets.push(Socket);
             console.log(`> client connected`);
-
-            console.log(`   local = ${Socket.localAddress}: ${Socket.localPort}`);//
             console.log(`   remote = ${Socket.remoteAddress}: ${Socket.remotePort}`);//접속 정보
 
             for(var i in this.#sockets)
@@ -51,26 +49,37 @@ class ChattingServer{
             
             rl.on("line",(msg)=>{
                 if(msg==='close'){
-                    console.log("\n\n-----This is not good idea!!-----\n Are you sure? [No]/yes : ")
-                    if(msg ==='yes') process.exit(1);
+                    rl.question("\n\n-----This is not good idea!!-----\n Are you sure? [No]/yes : ",(data)=>{
+                        if(data==='yes'){
+                            for(var i of this.#sockets)
+                                i.write("-----Server is Down-----\n\n")
+                            process.exit(1);
+                        }
+                    })
                 }
                 else if(msg==='exit'||msg==='quit'||msg==='end'){
-                    Socket.end();
+                    for(var i of this.#sockets)
+                        i.end();
                     console.log("Closing Server...");
+                    process.exit(0);
                 }
-                Socket.write(msg);
+                else
+                    Socket.write(`Server> ${msg}`);
             })
             Socket.on("data",(msg)=>{
                 var message = msg.toString()
                 var socketno = this.#sockets.findIndex((index)=> index===Socket);
                 console.log(`Socket#${socketno}> `,message);
-                for(var i in this.#sockets) this.#sockets[i].write(`Socket#${socketno}> ${message}`);
+                for(var i in this.#sockets)
+                    this.#sockets[i].write(`Socket#${socketno}> ${message}`);
             })
             Socket.on("end",()=>{
                 const ExitSocket = this.#sockets.findIndex((index)=> index===Socket);
-                if (ExitSocket > -1) this.#sockets.splice(ExitSocket, 1);
+                if (ExitSocket > -1)
+                    this.#sockets.splice(ExitSocket, 1);
                 console.log(`Socket#${ExitSocket} is exit.\nRemain #${this.#sockets.length} of Socket`);
-                for(var i in this.#sockets) this.#sockets[i].write(`Now your number is ${i}`);
+                for(var i in this.#sockets)
+                    this.#sockets[i].write(`Now your number is ${i}`);
             })
         });
         server.on('error', (err) => {
