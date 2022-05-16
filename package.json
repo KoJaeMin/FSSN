@@ -18,7 +18,8 @@
   "homepage": "https://github.com/KoJaeMin/FSSN#readme",
   "dependencies": {
     "@types/node": "^17.0.23",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "zeromq": "^5.2.8"
   },
   "devDependencies": {
     "typescript": "^4.7.0-dev.20220323"
