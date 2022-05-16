@@ -1,6 +1,7 @@
-import net from 'net';
-import dotenv from 'dotenv';
-import readline from 'readline';
+import * as net from 'net';
+import * as dotenv from 'dotenv';
+import * as readline from 'readline';
+import * as timers from 'timers';
 
 dotenv.config();
 
@@ -30,17 +31,33 @@ class ChattingServer{
             Socket.setDefaultEncoding('utf8');
         });
 
-        // server.on("listening",()=>{
-        //     if(this.#sockets.length===0){
-        //         ///client가 없었던 시간을 알려줌
-        //         setTimeout(console.log,1000,`Waiting someone... ${process.uptime()-this.#startTime}`);
-        //     }
-        // });
+        server.on("listening",()=>{
+            var IsEmpty = this.#sockets.length===0;
+            timers.setInterval(()=>{
+                IsEmpty = this.#sockets.length===0;
+                if(IsEmpty)
+                    console.log(`Waiting someone... ${process.uptime()-this.#startTime}`);
+                else
+                    this.#startTime = process.uptime();
+            },5000);
+
+            rl.on("line",(msg)=>{
+                if(IsEmpty){
+                    switch(msg){
+                        case 'exit':
+                        case 'quit':
+                        case 'end':
+                            console.log("Server is over...");
+                            process.exit(0);
+                    }
+                }
+            })
+        });
 
         server.on("connection",(Socket)=>{
             this.#sockets.push(Socket);
             console.log(`> client connected`);
-            console.log(`   remote = ${Socket.remoteAddress}: ${Socket.remotePort}`);//접속 정보
+            console.log(`remote = ${Socket.remoteAddress}: ${Socket.remotePort}`);//접속 정보
 
             for(var i in this.#sockets)
                 if(i<this.#sockets.length-1)
@@ -88,7 +105,7 @@ class ChattingServer{
         });
     
         server.listen(PORT, () => {
-            console.log('> server bound on ',server.address());
+            console.log('> server bound on ',server.address());            
         });
     };
 };
