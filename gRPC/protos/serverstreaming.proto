@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package serverstreaming;
+
+service ServerStreaming {
+  // A Client streaming RPC.
+   rpc GetServerResponse(Number) returns (stream Message) {}
+}
+
+message Message {
+  string message = 1;
+}
+
+message Number {
+  int32 value = 1;
+}
