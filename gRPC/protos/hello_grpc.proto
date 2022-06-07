@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package hello_grpc;
+
+service MyService {
+  rpc MyFunction (MyNumber) returns (MyNumber) {}
+}
+
+message MyNumber {
+  int32 value = 1;
+}
