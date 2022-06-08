@@ -31,7 +31,7 @@ Install package:
     npm install
 ```
 
-## Commit Convention
+## Code Convention
 
 |유형|뜻|설명|
 |------|---|---|

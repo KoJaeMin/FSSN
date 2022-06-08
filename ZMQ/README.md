@@ -16,12 +16,12 @@ This pattern is 1:1 socket programming enhance version!!
 First, use this command in your termianl :
 
 ```console
-    node req_res_server.mjs
+    node req_rep_server.mjs
 ```
 Another bash or termianl :
 
 ```console
-    node req_res_client.mjs
+    node req_rep_client.mjs
 ```
 
 ## Publish-Subscribe Pattern
