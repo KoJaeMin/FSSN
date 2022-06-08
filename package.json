@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/KoJaeMin/FSSN#readme",
   "dependencies": {
+    "@grpc/grpc-js": "^1.6.7",
+    "@grpc/proto-loader": "^0.6.12",
     "@types/node": "^17.0.23",
     "dotenv": "^16.0.0",
+    "grpc": "^1.24.11",
     "zeromq": "^5.2.8"
   },
   "devDependencies": {
