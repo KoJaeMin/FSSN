@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as readline from 'readline';
+import * as timers from 'timers';
 
 dotenv.config();
 
@@ -11,4 +12,4 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-export {HOST,PORT,rl};
+export {HOST,PORT,rl,timers};
