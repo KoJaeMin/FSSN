@@ -32,7 +32,7 @@ class ChattingServer{
         });
 
         server.on("listening",()=>{
-            var IsEmpty = this.#sockets.length===0;
+            let IsEmpty = this.#sockets.length===0;
             timers.setInterval(()=>{
                 IsEmpty = this.#sockets.length===0;
                 if(IsEmpty)
@@ -59,7 +59,7 @@ class ChattingServer{
             console.log(`> client connected`);
             console.log(`remote = ${Socket.remoteAddress}: ${Socket.remotePort}`);//접속 정보
 
-            for(var i in this.#sockets)
+            for(let i in this.#sockets)
                 if(i<this.#sockets.length-1)
                     this.#sockets[i].write(`Socket#${this.#sockets.findIndex((index)=> index===Socket)} is comming\n\r`);
             Socket.write(`Welcome to tcp chatting your number is ${this.#sockets.findIndex((index)=> index===Socket)}\r\n`);
@@ -68,14 +68,14 @@ class ChattingServer{
                 if(msg==='close'){
                     rl.question("\n\n-----This is not good idea!!-----\n Are you sure? [No]/yes : ",(data)=>{
                         if(data==='yes'){
-                            for(var i of this.#sockets)
+                            for(let i of this.#sockets)
                                 i.write("-----Server is Down-----\n\n")
                             process.exit(1);
                         }
                     })
                 }
                 else if(msg==='exit'||msg==='quit'||msg==='end'){
-                    for(var i of this.#sockets)
+                    for(let i of this.#sockets)
                         i.end();
                     console.log("Closing Server...");
                     process.exit(0);
@@ -84,10 +84,10 @@ class ChattingServer{
                     Socket.write(`Server> ${msg}`);
             })
             Socket.on("data",(msg)=>{
-                var message = msg.toString()
-                var socketno = this.#sockets.findIndex((index)=> index===Socket);
+                let message = msg.toString()
+                let socketno = this.#sockets.findIndex((index)=> index===Socket);
                 console.log(`Socket#${socketno}> `,message);
-                for(var i in this.#sockets)
+                for(let i in this.#sockets)
                     this.#sockets[i].write(`Socket#${socketno}> ${message}`);
             })
             Socket.on("end",()=>{
@@ -95,7 +95,7 @@ class ChattingServer{
                 if (ExitSocket > -1)
                     this.#sockets.splice(ExitSocket, 1);
                 console.log(`Socket#${ExitSocket} is exit.\nRemain #${this.#sockets.length} of Socket`);
-                for(var i in this.#sockets)
+                for(let i in this.#sockets)
                     this.#sockets[i].write(`Now your number is ${i}`);
             })
         });
@@ -110,5 +110,5 @@ class ChattingServer{
     };
 };
 
-var server = new ChattingServer;
+let server = new ChattingServer;
 server.Runnig()
