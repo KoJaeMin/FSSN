@@ -15,7 +15,12 @@
     
     - [HTTP/3][version3]
 
-- [ZMQ][Zero message queue]
+
+- [MQ][Message Queue]
+
+    - [ZMQ][Zero message queue]
+
+    - [Kafka][Kafka]
 
 - [gRPC][gRPC]
 
@@ -26,7 +31,9 @@
 
 [Socket Programming]: ./Socket/ "소켓프로그래밍"
 [http]: ./HTTP/ "HTTP"
-[Zero message queue]: ./ZMQ/ "Zero Message Queue"
+[Message Queue]: ./MQ/
+[Zero message queue]: ./MQ/ZMQ/ "Zero Message Queue"
+[Kafka]: ./MQ/Kafka/ "Kafka"
 [gRPC]: ./gRPC/ "gRPC"
 [WebRTC]: ./WebRTC/ "WebRTC"
 [QUIC]: ./QUIC/ "QUIC"
