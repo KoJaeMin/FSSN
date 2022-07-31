@@ -22,6 +22,7 @@
     "@types/node": "^17.0.23",
     "dotenv": "^16.0.0",
     "grpc": "^1.24.11",
+    "kafkajs": "^2.1.0",
     "zeromq": "^5.2.8"
   },
   "devDependencies": {
