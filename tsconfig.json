@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "esModuleInterop" :true
+  },
+  "include": ["/**/*"],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
