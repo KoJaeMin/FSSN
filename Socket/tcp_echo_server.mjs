@@ -36,7 +36,7 @@ class ChattingServer{
             timers.setInterval(()=>{
                 IsEmpty = this.#sockets.length===0;
                 if(IsEmpty)
-                    console.log(`Waiting someone... ${process.uptime()-this.#startTime}`);
+                    console.log(`Waiting someone... ${parseInt(process.uptime()-this.#startTime)}`);
                 else
                     this.#startTime = process.uptime();
             },5000);
@@ -92,8 +92,10 @@ class ChattingServer{
             })
             Socket.on("end",()=>{
                 const ExitSocket = this.#sockets.findIndex((index)=> index===Socket);
-                if (ExitSocket > -1)
+                if (ExitSocket > -1){
                     this.#sockets.splice(ExitSocket, 1);
+                    this.#startTime = process.uptime();
+                }
                 console.log(`Socket#${ExitSocket} is exit.\nRemain #${this.#sockets.length} of Socket`);
                 for(let i in this.#sockets)
                     this.#sockets[i].write(`Now your number is ${i}`);
